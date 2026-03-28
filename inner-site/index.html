@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>OS</title>
+    <style>
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body, #root { width: 100%; height: 100%; overflow: hidden; }
+    </style>
+    <script>
+      // Relay mouse/keyboard events to parent 3D scene
+      window.addEventListener('load', () => {
+        document.addEventListener('mousemove', (e) => {
+          window.parent.postMessage({
+            type: 'mousemove',
+            nx: (e.clientX / window.innerWidth) * 2 - 1,
+            ny: -(e.clientY / window.innerHeight) * 2 + 1,
+          }, '*');
+        });
+        document.addEventListener('mousedown', () => {
+          window.parent.postMessage({ type: 'mousedown' }, '*');
+        });
+        document.addEventListener('mouseup', () => {
+          window.parent.postMessage({ type: 'mouseup' }, '*');
+        });
+        document.addEventListener('keydown', (e) => {
+          window.parent.postMessage({ type: 'keydown', key: e.key }, '*');
+        });
+      });
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
