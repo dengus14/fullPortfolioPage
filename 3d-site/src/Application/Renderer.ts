@@ -5,11 +5,13 @@ import { Sizes } from "./Utils/Sizes";
 export class Renderer {
   webgl: THREE.WebGLRenderer;
   css3d: CSS3DRenderer;
+  cssActive = false; // skip CSS3D render when monitor is not facing camera
 
   constructor(private sizes: Sizes) {
     this.webgl = new THREE.WebGLRenderer({
-      antialias: true,
+      antialias: window.devicePixelRatio < 2, // display upscaling handles AA at 2× DPR
       alpha: false,
+      powerPreference: "high-performance",
     });
     this.webgl.setClearColor(0xc8c8c8);
     this.webgl.setSize(sizes.width, sizes.height);
@@ -18,7 +20,7 @@ export class Renderer {
     this.webgl.toneMapping = THREE.ACESFilmicToneMapping;
     this.webgl.toneMappingExposure = 1.2;
     this.webgl.shadowMap.enabled = true;
-    this.webgl.shadowMap.type = THREE.PCFSoftShadowMap;
+    this.webgl.shadowMap.type = THREE.PCFShadowMap; // 3 samples vs PCFSoft's 9
     this.webgl.domElement.classList.add("webgl");
     document.getElementById("app")!.prepend(this.webgl.domElement);
 
@@ -38,7 +40,7 @@ export class Renderer {
     camera: THREE.PerspectiveCamera
   ) {
     this.webgl.render(scene, camera);
-    this.css3d.render(cssScene, camera);
+    if (this.cssActive) this.css3d.render(cssScene, camera);
   }
 
   private onResize() {

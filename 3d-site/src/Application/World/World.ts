@@ -37,13 +37,13 @@ export class World {
     const key = new THREE.DirectionalLight(0xfff4e0, 1.2);
     key.position.set(3, 5, 3);
     key.castShadow = true;
-    key.shadow.mapSize.set(2048, 2048);
+    key.shadow.mapSize.set(1024, 1024); // 2048 was overkill for a desk scene
     key.shadow.camera.near = 0.1;
     key.shadow.camera.far = 50;
-    key.shadow.camera.left = -5;
-    key.shadow.camera.right = 5;
-    key.shadow.camera.top = 5;
-    key.shadow.camera.bottom = -5;
+    key.shadow.camera.left = -3; // tighter frustum = more shadow texels on the actual scene
+    key.shadow.camera.right = 3;
+    key.shadow.camera.top = 3;
+    key.shadow.camera.bottom = -3;
     this.scene.add(key);
 
     const fill = new THREE.DirectionalLight(0xd0e8ff, 0.4);

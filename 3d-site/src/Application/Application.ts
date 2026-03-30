@@ -20,6 +20,8 @@ export class Application {
   private activeMonitor: string | null = null;
   private worldReady = false;
   private _camDir = new THREE.Vector3();
+  private _lastFacing: boolean | null = null;
+  private _monitorDirty = false;
 
   constructor() {
     this.sizes = new Sizes();
@@ -74,6 +76,7 @@ export class Application {
         this.returnToIdle();
       } else {
         this.activeMonitor = monitorId;
+        this._monitorDirty = true;
         this.camera.transition(monitorId === "left" ? "monitorLeft" : "monitorRight");
         const hint = document.getElementById("monitor-hint");
         if (hint) hint.textContent = "Press ESC to step back";
@@ -85,6 +88,7 @@ export class Application {
 
   private returnToIdle() {
     this.activeMonitor = null;
+    this._monitorDirty = true;
     this.camera.transition("idle");
     const hint = document.getElementById("monitor-hint");
     if (hint) hint.textContent = "Click a monitor to explore";
@@ -96,6 +100,11 @@ export class Application {
     this._camDir.copy(this.camera.instance.position).sub(MONITOR_POS).normalize();
     const facing = MONITOR_NORMAL.dot(this._camDir) > 0.5;
 
+    if (facing === this._lastFacing && !this._monitorDirty) return;
+    this._lastFacing = facing;
+    this._monitorDirty = false;
+
+    this.renderer.cssActive = facing;
     this.world.monitors.forEach((m) => {
       if (!facing) {
         m.hide();
