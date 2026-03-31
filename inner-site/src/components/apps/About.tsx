@@ -1,6 +1,6 @@
 import { T } from "../../styles/tokens";
 
-const SKILLS = ["TypeScript", "React", "Three.js", "Node.js", "Python", "Blender", "WebGL", "CSS"];
+const SKILLS = ["TypeScript", "React", "Next.js", "Java", "Spring Boot", "Three.js", "PostgreSQL", "Docker", "Kafka", "Node.js", "Python", "Blender"];
 
 export default function About() {
   return (
@@ -15,42 +15,53 @@ export default function About() {
           fontSize: 22, color: "#fff", fontWeight: 600,
           boxShadow: T.shadowSm,
         }}>
-          YN
+          DG
         </div>
         <div>
-          <div style={{ fontSize: T.lg, fontWeight: 600, color: T.text }}>Your Name</div>
-          <div style={{ fontSize: T.sm, color: T.textSub, marginTop: 2 }}>Software Engineer · Location</div>
+          <div style={{ fontSize: T.lg, fontWeight: 600, color: T.text }}>Denis Gusev</div>
+          <div style={{ fontSize: T.sm, color: T.textSub, marginTop: 2 }}>Software Engineer · Milwaukee, WI</div>
         </div>
       </div>
 
       <Divider />
 
       <Section title="Background">
-        Write your background story here. Where you came from, what got you into software,
-        and what kind of problems you love to solve.
+        I'm a software engineer finishing a BS in Computer Science at UW–Milwaukee (December 2025).
+        I build across the full stack — from distributed Java microservices to React frontends and
+        interactive 3D experiences. I'm drawn to problems that sit at the intersection of engineering
+        and visual craft: the kind where making it work and making it feel good are the same challenge.
       </Section>
 
       <Section title="Skills">
         <div style={{ display: "flex", flexWrap: "wrap", gap: 5, marginTop: 2 }}>
           {SKILLS.map((s) => (
-            <span key={s} style={{
-              padding: "3px 10px", borderRadius: 20,
-              background: T.accentBg, border: `1px solid ${T.accentBorder}`,
-              fontSize: T.xs, color: T.accent, fontWeight: 500,
-            }}>
-              {s}
-            </span>
+            <Chip key={s}>{s}</Chip>
           ))}
         </div>
       </Section>
 
       <Section title="Education">
-        BSc Computer Science · Your University · 2022
+        BS Computer Science · University of Wisconsin–Milwaukee · December 2025
       </Section>
 
       <Section title="Interests">
         3D graphics, game development, music production, design, and building things that feel alive.
       </Section>
+    </div>
+  );
+}
+
+function Chip({ children }: { children: React.ReactNode }) {
+  return (
+    <div style={{
+      position: "relative",
+      borderRadius: 20,
+      overflow: "hidden",
+      boxShadow: `0 0 0 1px ${T.accentBorder}`,
+      fontSize: T.xs, color: T.accent, fontWeight: 500,
+    }}>
+      <div style={{ position: "absolute", inset: -1, background: T.accentBg, pointerEvents: "none" }} />
+      <div style={{ position: "relative", padding: "3px 10px", lineHeight: 1.4, whiteSpace: "nowrap" }}>{children}</div>
     </div>
   );
 }

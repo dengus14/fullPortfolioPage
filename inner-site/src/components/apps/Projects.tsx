@@ -2,9 +2,41 @@ import { useState } from "react";
 import { T } from "../../styles/tokens";
 
 const PROJECTS = [
-  { id: "1", title: "3D Portfolio",  tags: ["Three.js", "TypeScript", "Blender"], desc: "This very site — an interactive 3D portfolio built with Three.js and a custom Blender scene rendered in WebGL.", link: "#" },
-  { id: "2", title: "Project Two",   tags: ["React", "Node.js"],                  desc: "Brief description of what this project does and what problems it solves.", link: "#" },
-  { id: "3", title: "Project Three", tags: ["Python", "ML"],                      desc: "Another project description goes here.", link: "#" },
+  {
+    id: "1",
+    title: "IoT Fleet Management System",
+    tags: ["Java 17", "Spring Boot", "Kafka", "PostgreSQL", "Microservices"],
+    desc: "A real-time fleet tracking system built to learn distributed systems properly. Four Spring Boot microservices (device, route, telemetry, simulator) communicate asynchronously over Kafka. Vehicles are created, assigned routes across a graph of Midwest cities, and travel between nodes in real time consuming fuel based on vehicle type. Dijkstra's algorithm in the route service calculates shortest paths. A Java CLI simulator drives vehicles along graph edges tick by tick. Coordinating four services over async messaging — and debugging the edge cases that come with it — was the real education here.",
+    link: "#",
+  },
+  {
+    id: "2",
+    title: "3D Portfolio Website",
+    tags: ["Three.js", "React", "TypeScript", "Blender", "CSS3DRenderer"],
+    desc: "This site. Two entry modes: a traditional web portfolio and a 3D interactive scene built in Three.js around a Blender-modeled gaming desk. The 3D mode uses CSS3DRenderer to composite a live iframe directly onto the monitor mesh, so clicking the monitor opens a fully functional fake OS desktop — draggable windows, taskbar, animated icons — running inside the 3D scene. The inner OS is a separate React app on its own Vite dev server. Getting WebGL and CSS rendering to composite without z-fighting was a genuine rabbit hole.",
+    link: "#",
+  },
+  {
+    id: "3",
+    title: "Scan-To-Access",
+    tags: ["Node.js", "React Native", "Tesseract.js", "Google Cloud Vision", "JWT", "PostgreSQL"],
+    desc: "Senior capstone project (CompSci 595), team of 4 — I led backend development. A mobile app where users photograph handwritten notes and have text extracted via OCR (Tesseract.js with Google Cloud Vision fallback). Notes are protected by a 6-character access code printed on physical paper; scanning the document auto-extracts and verifies the code to unlock the note. Also includes flashcard study mode, JWT auth, and full profile management. First time leading a real team's backend architecture.",
+    link: "#",
+  },
+  {
+    id: "4",
+    title: "Web Crawler & Site Auditor",
+    tags: ["Java", "Spring Boot", "React", "Vite", "PostgreSQL"],
+    desc: "Give it a URL and it BFS-crawls the entire site across multiple threads, then generates an audit report. The report breaks down broken links by HTTP status code, SEO issues (missing H1s, titles over 60 characters), the slowest pages using a min-heap to surface the top 10% by response time, and near-duplicate pages detected with SimHash. Backend in Java/Spring Boot, frontend in React/Vite, deployed with PostgreSQL. Debugging CORS between the two in production was a thorough education in how browsers actually work.",
+    link: "#",
+  },
+  {
+    id: "5",
+    title: "MindBody Fitness Tracker",
+    tags: ["Java 21", "Spring Boot", "JWT", "PostgreSQL", "Docker"],
+    desc: "Full-stack fitness tracking application. Users log workouts, track progress over time, and view metrics. Built with a Java 21 / Spring Boot backend, PostgreSQL for persistence, JWT for stateless auth, and Docker for consistent local and production environments.",
+    link: "#",
+  },
 ];
 
 export default function Projects() {
@@ -50,11 +82,16 @@ export default function Projects() {
               <div style={{ fontSize: T.xl, fontWeight: 600, color: T.text }}>{project.title}</div>
               <div style={{ display: "flex", gap: 5, flexWrap: "wrap", marginTop: 8 }}>
                 {project.tags.map((t) => (
-                  <span key={t} style={{
-                    padding: "3px 10px", borderRadius: 20,
-                    background: T.accentBg, border: `1px solid ${T.accentBorder}`,
+                  <div key={t} style={{
+                    position: "relative",
+                    borderRadius: 20,
+                    overflow: "hidden",
+                    boxShadow: `0 0 0 1px ${T.accentBorder}`,
                     fontSize: T.xs, color: T.accent, fontWeight: 500,
-                  }}>{t}</span>
+                  }}>
+                    <div style={{ position: "absolute", inset: -1, background: T.accentBg, pointerEvents: "none" }} />
+                    <div style={{ position: "relative", padding: "3px 10px", lineHeight: 1.4, whiteSpace: "nowrap" }}>{t}</div>
+                  </div>
                 ))}
               </div>
             </div>

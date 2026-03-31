@@ -20,9 +20,9 @@ export default function Contact() {
       {/* Social links */}
       <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
         {[
-          { href: "mailto:you@email.com", label: "Email" },
-          { href: "https://github.com",   label: "GitHub ↗" },
-          { href: "https://linkedin.com", label: "LinkedIn ↗" },
+          { href: "mailto:ddgusev0318@gmail.com",                   label: "Email" },
+          { href: "https://github.com/dengus14",                    label: "GitHub ↗" },
+          { href: "https://www.linkedin.com/in/denis-gusev342/",   label: "LinkedIn ↗" },
         ].map(({ href, label }) => (
           <a key={label} href={href} target="_blank" rel="noreferrer" style={{
             padding: "5px 14px", borderRadius: T.radiusSm,

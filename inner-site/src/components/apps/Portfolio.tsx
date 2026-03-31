@@ -3,11 +3,41 @@ import { T } from "../../styles/tokens";
 
 type NavItem = "HOME" | "ABOUT" | "EXPERIENCE" | "SOFTWARE";
 
-const NAV: { id: NavItem; label: string }[] = [
-  { id: "HOME",       label: "Home" },
-  { id: "ABOUT",      label: "About" },
-  { id: "EXPERIENCE", label: "Experience" },
-  { id: "SOFTWARE",   label: "Software" },
+const NAV: { id: NavItem; label: string; color: string; icon: React.ReactNode }[] = [
+  {
+    id: "HOME", label: "Home", color: "#32ADE6",
+    icon: (
+      <svg viewBox="0 0 20 20" fill="white" width="15" height="15">
+        <path d="M10 2L2 9h2v9h5v-5h2v5h5V9h2L10 2z"/>
+      </svg>
+    ),
+  },
+  {
+    id: "ABOUT", label: "About", color: "#30D158",
+    icon: (
+      <svg viewBox="0 0 20 20" fill="white" width="15" height="15">
+        <circle cx="10" cy="6" r="3.5"/>
+        <path d="M3 17c0-3.866 3.134-7 7-7s7 3.134 7 7H3z"/>
+      </svg>
+    ),
+  },
+  {
+    id: "EXPERIENCE", label: "Experience", color: "#FF9F0A",
+    icon: (
+      <svg viewBox="0 0 20 20" fill="none" stroke="white" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" width="15" height="15">
+        <rect x="2" y="7" width="16" height="11" rx="2"/>
+        <path d="M7 7V5a3 3 0 016 0v2"/>
+      </svg>
+    ),
+  },
+  {
+    id: "SOFTWARE", label: "Software", color: "#BF5AF2",
+    icon: (
+      <svg viewBox="0 0 20 20" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" width="15" height="15">
+        <path d="M6 7l-4 3 4 3M14 7l4 3-4 3M11 5l-2 10"/>
+      </svg>
+    ),
+  },
 ];
 
 export default function Portfolio() {
@@ -17,34 +47,46 @@ export default function Portfolio() {
     <div style={{ display: "flex", height: "100%", overflow: "hidden" }}>
       {/* Sidebar */}
       <nav style={{
-        width: 148, flexShrink: 0, overflowY: "auto",
-        background: "rgba(255,255,255,0.35)",
-        borderRight: `1px solid ${T.borderSub}`,
-        padding: "14px 10px",
+        width: 190, flexShrink: 0, overflowY: "auto",
+        background: "#2c2c2e",
+        borderRight: "1px solid rgba(255,255,255,0.08)",
+        padding: "14px 8px",
         display: "flex", flexDirection: "column", gap: 2,
       }}>
-        <div style={{ padding: "0 6px 12px", borderBottom: `1px solid ${T.borderSub}`, marginBottom: 6 }}>
-          <div style={{ fontSize: T.md, fontWeight: 700, color: T.text, lineHeight: 1.2 }}>Your Name</div>
-          <div style={{ fontSize: T.xs, color: T.textSub, marginTop: 2 }}>Portfolio</div>
+        {/* Header */}
+        <div style={{ padding: "0 6px 10px", borderBottom: "1px solid rgba(255,255,255,0.08)", marginBottom: 4 }}>
+          <div style={{ fontSize: T.md, fontWeight: 700, color: "#ffffff", lineHeight: 1.2 }}>Denis Gusev</div>
+          <div style={{ fontSize: T.xs, color: "rgba(255,255,255,0.45)", marginTop: 2 }}>Portfolio</div>
         </div>
 
-        {NAV.map(({ id, label }) => {
+        {/* Nav items — direct, no container */}
+        {NAV.map(({ id, label, color, icon }) => {
           const active = page === id;
           return (
             <button
               key={id}
               onClick={() => setPage(id)}
               style={{
-                textAlign: "left", padding: "7px 10px", borderRadius: T.radiusSm,
-                background: active ? T.accentBg : "transparent",
-                border: `1px solid ${active ? T.accentBorder : "transparent"}`,
-                color: active ? T.accent : T.text,
-                fontSize: T.sm, fontWeight: active ? 600 : 400,
-                cursor: "pointer", transition: "all 0.15s",
+                textAlign: "left", padding: "9px 10px", borderRadius: 8,
+                background: active ? "#0A84FF" : "transparent",
+                border: "none",
+                color: active ? "#ffffff" : "rgba(255,255,255,0.9)",
+                fontSize: T.sm, fontWeight: 400,
+                cursor: "pointer", transition: "background 0.15s",
+                display: "flex", alignItems: "center", gap: 10,
+                width: "100%",
               }}
-              onMouseEnter={(e) => { if (!active) e.currentTarget.style.background = "rgba(255,255,255,0.45)"; }}
+              onMouseEnter={(e) => { if (!active) e.currentTarget.style.background = "rgba(255,255,255,0.07)"; }}
               onMouseLeave={(e) => { if (!active) e.currentTarget.style.background = "transparent"; }}
             >
+              <span style={{
+                width: 26, height: 26, borderRadius: 6,
+                background: color,
+                display: "flex", alignItems: "center", justifyContent: "center",
+                flexShrink: 0,
+              }}>
+                {icon}
+              </span>
               {label}
             </button>
           );
@@ -65,24 +107,15 @@ function PageContent({ page }: { page: NavItem }) {
       return (
         <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
           <div>
-            <div style={{ fontSize: T.xxl, fontWeight: 700, color: T.text, lineHeight: 1.15 }}>Welcome</div>
-            <div style={{ fontSize: T.md, color: T.textSub, marginTop: 4 }}>Software Engineer · Creative Developer</div>
+            <div style={{ fontSize: T.xxl, fontWeight: 700, color: T.text, lineHeight: 1.15 }}>Denis Gusev</div>
+            <div style={{ fontSize: T.md, color: T.textSub, marginTop: 4 }}>Software Engineer · Milwaukee, WI</div>
           </div>
           <Divider />
           <p style={{ fontSize: T.md, color: T.text, lineHeight: 1.7, margin: 0 }}>
-            Hi — I build interactive, visually driven experiences. Explore the SOFTWARE section for
-            projects, or ABOUT to learn more about me.
+            Hi — I'm Denis, a software engineer finishing a BS in Computer Science at UW–Milwaukee.
+            I build full-stack applications, distributed Java systems, and interactive 3D experiences.
+            Explore SOFTWARE for projects, EXPERIENCE for my background, or ABOUT for more on me.
           </p>
-          <div style={{
-            display: "flex", alignItems: "center", gap: 12, padding: "12px 14px",
-            background: T.accentBg, border: `1px solid ${T.accentBorder}`, borderRadius: T.radiusSm,
-          }}>
-            <div style={{ fontSize: 20 }}>📄</div>
-            <div>
-              <div style={{ fontSize: T.sm, fontWeight: 600, color: T.text }}>Looking for my resume?</div>
-              <a href="#" style={{ fontSize: T.sm, color: T.accent, textDecoration: "none" }}>Click here to download it</a>
-            </div>
-          </div>
         </div>
       );
 
@@ -91,17 +124,19 @@ function PageContent({ page }: { page: NavItem }) {
         <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
           <SectionHeader>About</SectionHeader>
           <p style={bodyStyle}>
-            I'm a software engineer with a passion for creative technology — building things at the
-            intersection of code and design, from 3D interactive experiences to full-stack apps.
+            I'm a software engineer finishing a BS in Computer Science at UW–Milwaukee (December 2025).
+            I've interned at Northwestern Mutual building React/Next.js features for 8,000+ financial
+            reps, written distributed Java microservices communicating over Kafka, and spent way too
+            many nights debugging WebGL rendering pipelines.
           </p>
           <Divider />
           <p style={bodyStyle}>
-            When I'm not writing code I'm probably exploring music production, 3D modeling, or
-            finding new ways to blend art with technology.
+            When I'm not writing code I'm probably exploring 3D modeling in Blender, music production,
+            or finding new ways to blend engineering and visual craft.
           </p>
           <Label>Skills</Label>
           <div style={{ display: "flex", flexWrap: "wrap", gap: 5 }}>
-            {["TypeScript", "React", "Three.js", "Node.js", "Python", "Blender", "WebGL"].map((s) => (
+            {["TypeScript", "React", "Next.js", "Java", "Spring Boot", "Three.js", "PostgreSQL", "Docker", "Kafka", "Node.js", "Python", "Blender"].map((s) => (
               <Chip key={s}>{s}</Chip>
             ))}
           </div>
@@ -112,14 +147,11 @@ function PageContent({ page }: { page: NavItem }) {
       return (
         <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
           <SectionHeader>Experience</SectionHeader>
-          <ExpEntry company="Company Name" role="Software Engineer" period="2023 – Present"
-            desc="Describe your role, what you built, the technologies used, and the impact you had." />
+          <ExpEntry company="Northwestern Mutual · Milwaukee, WI" role="Software Engineer Intern" period="May 2025 – Aug. 2025"
+            desc="Built responsive, accessible UI with React, Next.js, and Luna Design System for 8,000+ financial reps. Integrated RESTful APIs for real-time health metric rendering. Utilized GitLab CI/CD with Docker and Jest (99.9% coverage). Collaborated in Agile sprints to deliver high-quality features on schedule." />
           <Divider />
-          <ExpEntry company="Previous Company" role="Junior Developer" period="2021 – 2023"
-            desc="Earlier role description. Skills developed and projects you contributed to." />
-          <Divider />
-          <ExpEntry company="University" role="BSc Computer Science" period="2017 – 2021"
-            desc="Degree details, notable coursework, any awards or research." />
+          <ExpEntry company="University of Wisconsin–Milwaukee" role="BS Computer Science" period="2021 – Dec. 2025"
+            desc="Relevant coursework in distributed systems, algorithms, and software engineering. Senior capstone: Scan-To-Access — an OCR-based note-sharing mobile app (team of 4, lead backend developer)." />
         </div>
       );
 
@@ -127,16 +159,22 @@ function PageContent({ page }: { page: NavItem }) {
       return (
         <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
           <SectionHeader>Software</SectionHeader>
-          <p style={bodyStyle}>Favorite software projects from the last few years.</p>
+          <p style={bodyStyle}>Selected projects from the last few years.</p>
           <Divider />
-          <ProjectEntry title="This Portfolio" tags={["Three.js", "React", "Blender"]}
-            desc="Interactive 3D portfolio built with Three.js — a custom Blender scene rendered in WebGL with a full embedded OS." />
+          <ProjectEntry title="IoT Fleet Management System" tags={["Java 17", "Spring Boot", "Kafka", "PostgreSQL", "Microservices"]}
+            desc="Real-time fleet tracking system with four Spring Boot microservices communicating over Kafka. Vehicles travel graph edges tick-by-tick with Dijkstra's algorithm for shortest-path routing and per-vehicle-type fuel consumption." />
           <Divider />
-          <ProjectEntry title="Project Two" tags={["React", "Node.js"]}
-            desc="Description of your second project. What it solves, how you built it." />
+          <ProjectEntry title="3D Portfolio Website" tags={["Three.js", "React", "TypeScript", "Blender", "CSS3DRenderer"]}
+            desc="Two-mode portfolio: a traditional web view and a 3D interactive scene built in Three.js around a Blender-modeled gaming desk. A CSS3DRenderer iframe composites a fully functional fake OS — draggable windows, taskbar, animated icons — directly onto the monitor mesh." />
           <Divider />
-          <ProjectEntry title="Project Three" tags={["Python", "ML"]}
-            desc="Description of your third project. Link to GitHub or live demo if available." />
+          <ProjectEntry title="Scan-To-Access" tags={["Node.js", "React Native", "Tesseract.js", "Google Cloud Vision", "JWT"]}
+            desc="Senior capstone (team of 4, lead backend dev). Mobile app where users photograph handwritten notes for OCR extraction. Notes are locked behind a 6-character code printed on paper — scanning the document auto-extracts and verifies the code. Includes flashcard mode and JWT auth." />
+          <Divider />
+          <ProjectEntry title="Web Crawler & Site Auditor" tags={["Java", "Spring Boot", "React", "PostgreSQL", "Vite"]}
+            desc="Website auditing tool that BFS-crawls an entire site across multiple threads and generates a report covering broken links by HTTP status, SEO issues (missing H1s, long titles), slowest pages via a min-heap, and near-duplicate pages detected with SimHash." />
+          <Divider />
+          <ProjectEntry title="MindBody Fitness Tracker" tags={["Java 21", "Spring Boot", "JWT", "PostgreSQL", "Docker"]}
+            desc="Full-stack fitness tracking app with JWT authentication, workout logging, and progress visualization. Containerized with Docker for consistent local and production environments." />
         </div>
       );
 
@@ -164,13 +202,16 @@ function Divider() {
 
 function Chip({ children }: { children: React.ReactNode }) {
   return (
-    <span style={{
-      padding: "3px 10px", borderRadius: 20,
-      background: T.accentBg, border: `1px solid ${T.accentBorder}`,
+    <div style={{
+      position: "relative",
+      borderRadius: 20,
+      overflow: "hidden",
+      boxShadow: `0 0 0 1px ${T.accentBorder}`,
       fontSize: T.xs, color: T.accent, fontWeight: 500,
     }}>
-      {children}
-    </span>
+      <div style={{ position: "absolute", inset: -1, background: T.accentBg, pointerEvents: "none" }} />
+      <div style={{ position: "relative", padding: "3px 10px", lineHeight: 1.4, whiteSpace: "nowrap" }}>{children}</div>
+    </div>
   );
 }
 

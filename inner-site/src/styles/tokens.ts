@@ -1,35 +1,40 @@
-// design tokens — glassmorphism light theme
+// macOS design tokens
 export const T = {
-  // surfaces
-  glass:       "rgba(255,255,255,0.55)",
-  glassStrong: "rgba(255,255,255,0.72)",
-  glassDim:    "rgba(255,255,255,0.35)",
-  border:      "rgba(255,255,255,0.75)",
-  borderSub:   "rgba(0,0,0,0.07)",
+  // surfaces & vibrancy
+  glass:        "rgba(255,255,255,0.72)",
+  glassStrong:  "rgba(255,255,255,0.88)",
+  glassDim:     "rgba(255,255,255,0.45)",
+  border:       "rgba(0,0,0,0.12)",
+  borderSub:    "rgba(0,0,0,0.07)",
 
-  // text
-  text:        "#1a1a2e",
-  textSub:     "rgba(26,26,46,0.52)",
-  textMuted:   "rgba(26,26,46,0.35)",
+  // Apple system text
+  text:         "#1d1d1f",
+  textSub:      "#6e6e73",
+  textMuted:    "#aeaeb2",
 
-  // accent
-  accent:      "#5b6af0",
-  accentBg:    "rgba(91,106,240,0.1)",
-  accentBorder:"rgba(91,106,240,0.25)",
+  // Apple Blue
+  accent:       "#007AFF",
+  accentBg:     "rgba(0,122,255,0.1)",
+  accentBorder: "rgba(0,122,255,0.25)",
+
+  // traffic lights
+  trafficRed:    "#FF5F57",
+  trafficYellow: "#FEBC2E",
+  trafficGreen:  "#28C840",
 
   // feedback
-  success:     "#22c55e",
-  error:       "#ef4444",
+  success: "#34C759",
+  error:   "#FF3B30",
 
-  // shadow
-  shadow:      "0 4px 24px rgba(0,0,0,0.08), 0 1px 4px rgba(0,0,0,0.04)",
-  shadowSm:    "0 2px 8px rgba(0,0,0,0.06)",
+  // macOS window shadow
+  shadow:   "0 22px 70px 4px rgba(0,0,0,0.48), 0 0 0 1px rgba(0,0,0,0.18)",
+  shadowSm: "0 2px 8px rgba(0,0,0,0.12)",
 
   // radius
-  radius:      10,
-  radiusSm:    6,
+  radius:   10,
+  radiusSm: 6,
 
-  // spacing (8px grid)
+  // 8pt spacing
   sp1: 4,
   sp2: 8,
   sp3: 12,
@@ -38,11 +43,11 @@ export const T = {
   sp6: 24,
 
   // type scale
-  xs:  11,
-  sm:  12,
-  md:  13,
-  base:14,
-  lg:  16,
-  xl:  20,
-  xxl: 26,
+  xs:   11,
+  sm:   12,
+  md:   13,
+  base: 14,
+  lg:   16,
+  xl:   20,
+  xxl:  26,
 };
