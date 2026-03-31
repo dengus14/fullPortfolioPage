@@ -26,7 +26,7 @@ export class World {
     }
 
     this.setupLighting();
-    this.loadModel(onProgress);
+    this.loadModel(onProgress, renderer);
     this.setupMonitors();
   }
 
@@ -63,9 +63,14 @@ export class World {
     this.scene.add(glowMac);
   }
 
-  private loadModel(onProgress?: LoadCallback) {
+  private loadModel(onProgress?: LoadCallback, renderer?: THREE.WebGLRenderer) {
     const loader = new GLTFLoader();
-    const vsCodeTexture = buildVSCodeTexture(1640, 1024);
+    const vsCodeTexture = buildVSCodeTexture(3280, 2048);
+    vsCodeTexture.generateMipmaps = false;
+    vsCodeTexture.minFilter = THREE.LinearFilter;
+    if (renderer) {
+      vsCodeTexture.anisotropy = renderer.capabilities.getMaxAnisotropy();
+    }
 
     loader.load(
       "/gaming_scene.glb",
