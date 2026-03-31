@@ -17,13 +17,15 @@ interface MonitorConfig {
 // scale factor: 1000 css px = 1 world unit
 const SCALE_FACTOR = 1 / 1000;
 
+const INNER_SITE_URL = `${window.location.protocol}//${window.location.hostname}:5174`;
+
 const CONFIGS: Record<MonitorId, MonitorConfig> = {
   left: {
     position: new THREE.Vector3(-0.079, 1.821, 0.0),
     rotation: new THREE.Euler(0, Math.PI / 2, 0),
     width: 1483 * SCALE_FACTOR,
     height: 761 * SCALE_FACTOR,
-    url: "http://localhost:5174",
+    url: INNER_SITE_URL,
     iframeWidth: 1483,
     iframeHeight: 761,
   },
@@ -32,7 +34,7 @@ const CONFIGS: Record<MonitorId, MonitorConfig> = {
     rotation: new THREE.Euler(0, Math.PI / 2, 0),
     width: 1483 * SCALE_FACTOR,
     height: 761 * SCALE_FACTOR,
-    url: "http://localhost:5174",
+    url: INNER_SITE_URL,
     iframeWidth: 1483,
     iframeHeight: 761,
   },
