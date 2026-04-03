@@ -1,5 +1,6 @@
 import * as THREE from "three";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
+import { MeshoptDecoder } from "three/examples/jsm/libs/meshopt_decoder.module.js";
 import { RoomEnvironment } from "three/examples/jsm/environments/RoomEnvironment.js";
 import { MonitorScreen } from "./MonitorScreen";
 import { buildVSCodeTexture } from "./MacbookScreen";
@@ -58,6 +59,7 @@ export class World {
 
   private loadModel(onProgress?: LoadCallback, renderer?: THREE.WebGLRenderer) {
     const loader = new GLTFLoader();
+    loader.setMeshoptDecoder(MeshoptDecoder);
     const vsCodeTexture = buildVSCodeTexture(3280, 2048);
     vsCodeTexture.generateMipmaps = false;
     vsCodeTexture.minFilter = THREE.LinearFilter;
