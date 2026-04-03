@@ -79,7 +79,7 @@ export class Application {
         this._monitorDirty = true;
         this.camera.transition(monitorId === "left" ? "monitorLeft" : "monitorRight");
         const hint = document.getElementById("monitor-hint");
-        if (hint) hint.textContent = "Press ESC to step back";
+        if (hint) hint.textContent = "Click here to escape";
       }
     } else if (this.activeMonitor) {
       this.returnToIdle();
