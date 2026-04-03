@@ -17,7 +17,9 @@ interface MonitorConfig {
 // scale factor: 1000 css px = 1 world unit
 const SCALE_FACTOR = 1 / 1000;
 
-const INNER_SITE_URL = `${window.location.protocol}//${window.location.hostname}:5174`;
+const INNER_SITE_URL =
+  (import.meta.env.VITE_INNER_SITE_URL as string | undefined) ??
+  `${window.location.protocol}//${window.location.hostname}:5174`;
 
 const CONFIGS: Record<MonitorId, MonitorConfig> = {
   left: {

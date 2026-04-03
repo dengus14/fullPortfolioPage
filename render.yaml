@@ -1,0 +1,17 @@
+services:
+  - type: web
+    name: inner-site
+    env: static
+    rootDir: inner-site
+    buildCommand: npm install && npm run build
+    staticPublishPath: dist
+
+  - type: web
+    name: 3d-site
+    env: static
+    rootDir: 3d-site
+    buildCommand: npm install && npm run build
+    staticPublishPath: dist
+    envVars:
+      - key: VITE_INNER_SITE_URL
+        sync: false
