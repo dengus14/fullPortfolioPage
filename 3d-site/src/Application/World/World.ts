@@ -36,14 +36,7 @@ export class World {
 
     const key = new THREE.DirectionalLight(0xfff4e0, 1.2);
     key.position.set(3, 5, 3);
-    key.castShadow = true;
-    key.shadow.mapSize.set(1024, 1024); // 2048 was overkill for a desk scene
-    key.shadow.camera.near = 0.1;
-    key.shadow.camera.far = 50;
-    key.shadow.camera.left = -3; // tighter frustum = more shadow texels on the actual scene
-    key.shadow.camera.right = 3;
-    key.shadow.camera.top = 3;
-    key.shadow.camera.bottom = -3;
+    // key.castShadow — shadows disabled, re-enable if perf allows
     this.scene.add(key);
 
     const fill = new THREE.DirectionalLight(0xd0e8ff, 0.4);
@@ -80,8 +73,9 @@ export class World {
         model.traverse((child) => {
           if (!(child as THREE.Mesh).isMesh) return;
           const mesh = child as THREE.Mesh;
-          mesh.castShadow = true;
-          mesh.receiveShadow = true;
+          // shadows disabled — re-enable selectively if perf allows
+          // mesh.castShadow = true;
+          // mesh.receiveShadow = true;
 
           // hide the monitor screen mesh — the css3d iframe overlays it
           if (child.name === "monitor_screen") {

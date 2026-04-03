@@ -7,20 +7,21 @@ export class Time {
   private rafId: number = 0;
 
   constructor() {
-    this.start = Date.now();
+    this.start = performance.now();
     this.current = this.start;
     this.elapsed = 0;
-    this.delta = 16;
-    this.tick();
+    this.delta = 0;
+    // Defer first tick so the initial delta is a real frame duration, not
+    // however long model loading took between construction and first rAF.
+    this.rafId = requestAnimationFrame((t) => this.tick(t));
   }
 
-  private tick() {
-    const now = Date.now();
-    this.delta = now - this.current;
+  private tick(now: number) {
+    this.delta = Math.min(now - this.current, 100); // clamp to 100ms (handles background tabs)
     this.current = now;
     this.elapsed = now - this.start;
     this.callbacks.forEach((fn) => fn());
-    this.rafId = requestAnimationFrame(() => this.tick());
+    this.rafId = requestAnimationFrame((t) => this.tick(t));
   }
 
   onTick(fn: () => void) {
@@ -32,8 +33,8 @@ export class Time {
   }
 
   resume() {
-    this.current = Date.now();
-    this.tick();
+    this.current = performance.now();
+    this.rafId = requestAnimationFrame((t) => this.tick(t));
   }
 
   dispose() {

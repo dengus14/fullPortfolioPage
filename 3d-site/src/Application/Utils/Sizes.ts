@@ -7,7 +7,7 @@ export class Sizes {
   constructor() {
     this.width = window.innerWidth;
     this.height = window.innerHeight;
-    this.pixelRatio = Math.min(window.devicePixelRatio, 2);
+    this.pixelRatio = Math.min(window.devicePixelRatio, 1.5);
 
     let resizeTimer: ReturnType<typeof setTimeout>;
     window.addEventListener("resize", () => {
@@ -15,7 +15,7 @@ export class Sizes {
       resizeTimer = setTimeout(() => {
         this.width = window.innerWidth;
         this.height = window.innerHeight;
-        this.pixelRatio = Math.min(window.devicePixelRatio, 2);
+        this.pixelRatio = Math.min(window.devicePixelRatio, 1.5);
         this.listeners.forEach((fn) => fn());
       }, 150);
     });

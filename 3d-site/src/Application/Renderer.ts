@@ -19,8 +19,7 @@ export class Renderer {
     this.webgl.outputColorSpace = THREE.SRGBColorSpace;
     this.webgl.toneMapping = THREE.ACESFilmicToneMapping;
     this.webgl.toneMappingExposure = 1.2;
-    this.webgl.shadowMap.enabled = true;
-    this.webgl.shadowMap.type = THREE.PCFShadowMap; // 3 samples vs PCFSoft's 9
+    this.webgl.shadowMap.enabled = false;
     this.webgl.domElement.classList.add("webgl");
     document.getElementById("app")!.prepend(this.webgl.domElement);
 

@@ -63,7 +63,15 @@ export class Camera {
     this.state = state;
     this.targetPosition.copy(kf.position);
     this.targetLookAt.copy(kf.target);
+    this.settled = false;
   }
+
+  // Lerp decay bases — lower = faster/snappier, higher = slower/floatier.
+  // Tuned for 60fps feel; the delta-time formula keeps them frame-rate-independent.
+  private static readonly LERP_IDLE       = 0.93; // gentle parallax drift
+  private static readonly LERP_TRANSITION = 0.88; // snappy monitor zoom
+
+  private settled = false;
 
   update(deltaMs: number) {
     // subtle parallax drift in Z/Y while at idle
@@ -72,13 +80,28 @@ export class Camera {
       const pz = idleKf.position.z + this.mouse.nx * 0.5;
       const py = idleKf.position.y + this.mouse.ny * 0.2;
       this.targetPosition.set(idleKf.position.x, py, pz);
+      this.settled = false; // parallax target changes every frame
     }
 
-    // delta-time independent lerp so speed is consistent at any frame rate
-    const alpha = 1 - Math.pow(0.96, deltaMs / 16.667);
+    if (this.settled) return;
+
+    const base  = this.state === "idle" ? Camera.LERP_IDLE : Camera.LERP_TRANSITION;
+    const alpha = 1 - Math.pow(base, deltaMs / 16.667);
+
     this.instance.position.lerp(this.targetPosition, alpha);
     this.currentLookAt.lerp(this.targetLookAt, alpha);
     this.instance.lookAt(this.currentLookAt);
+
+    // snap and stop updating once close enough
+    if (
+      this.instance.position.distanceTo(this.targetPosition) < 0.0001 &&
+      this.currentLookAt.distanceTo(this.targetLookAt) < 0.0001
+    ) {
+      this.instance.position.copy(this.targetPosition);
+      this.currentLookAt.copy(this.targetLookAt);
+      this.instance.lookAt(this.currentLookAt);
+      this.settled = true;
+    }
   }
 
   private onResize() {
