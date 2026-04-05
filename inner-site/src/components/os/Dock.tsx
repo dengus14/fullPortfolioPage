@@ -69,7 +69,7 @@ export default function Dock({ windows, appDefs, onAppClick, onWindowClick }: Pr
         position: "relative",
         borderRadius: 20,
         overflow: "hidden",
-        boxShadow: "0 8px 32px rgba(0,0,0,0.28), 0 0 0 1px rgba(255,255,255,0.38), inset 0 1px 0 rgba(255,255,255,0.45)",
+        boxShadow: "0 8px 32px rgba(0,0,0,0.55), 0 0 0 1px rgba(255,255,255,0.09), inset 0 1px 0 rgba(255,255,255,0.08)",
       }}>
         {/* Blur + tint layer — extends -1px past edges so corners fill flush under the parent clip */}
         <div style={{
@@ -77,7 +77,7 @@ export default function Dock({ windows, appDefs, onAppClick, onWindowClick }: Pr
           inset: -1,
           backdropFilter: "blur(40px) saturate(180%)",
           WebkitBackdropFilter: "blur(40px) saturate(180%)",
-          background: "rgba(255,255,255,0.2)",
+          background: "rgba(14,14,22,0.55)",
           pointerEvents: "none",
         }} />
 

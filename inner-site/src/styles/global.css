@@ -1,7 +1,8 @@
-/* macOS design system */
+/* Unified dark design system — Space Grotesk / Archivo */
 :root {
-  --font: -apple-system, "SF Pro Display", "SF Pro Text", BlinkMacSystemFont, "Helvetica Neue", sans-serif;
-  --accent: #007AFF;
+  --font: 'Space Grotesk', -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif;
+  --font-heading: 'Archivo', 'Space Grotesk', sans-serif;
+  --accent: #5E6AD2;
   --menubar-h: 24px;
   --dock-h: 72px;
 }
@@ -15,16 +16,21 @@ html, body {
   font-size: 13px;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  color: #EDEDEF;
 }
 
-::selection { background: rgba(0,122,255,0.25); }
+::selection { background: rgba(94,106,210,0.35); }
 
-/* macOS thin overlay scrollbars */
+/* Dark thin overlay scrollbars */
 ::-webkit-scrollbar { width: 4px; height: 4px; }
 ::-webkit-scrollbar-track { background: transparent; }
-::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.18); border-radius: 4px; }
-::-webkit-scrollbar-thumb:hover { background: rgba(0,0,0,0.32); }
+::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.15); border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.28); }
 
 button { cursor: pointer; font-family: var(--font); border: none; outline: none; background: none; }
 a { color: var(--accent); text-decoration: none; }
 a:hover { text-decoration: underline; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+}

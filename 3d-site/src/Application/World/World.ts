@@ -32,27 +32,33 @@ export class World {
   }
 
   private setupLighting() {
-    const ambient = new THREE.AmbientLight(0xffffff, 0.6);
+    const ambient = new THREE.AmbientLight(0xffffff, 0.85);
     this.scene.add(ambient);
 
-    const key = new THREE.DirectionalLight(0xfff4e0, 1.2);
+    // hemisphere light adds subtle ground/sky separation on dark backgrounds
+    const hemi = new THREE.HemisphereLight(0x1a1a3e, 0x050506, 0.35);
+    this.scene.add(hemi);
+
+    const key = new THREE.DirectionalLight(0xfff4e0, 1.3);
     key.position.set(3, 5, 3);
     // key.castShadow — shadows disabled, re-enable if perf allows
     this.scene.add(key);
 
-    const fill = new THREE.DirectionalLight(0xd0e8ff, 0.4);
+    const fill = new THREE.DirectionalLight(0xd0d8ff, 0.45);
     fill.position.set(-3, 2, -1);
     this.scene.add(fill);
 
-    const rim = new THREE.DirectionalLight(0xffffff, 0.2);
+    const rim = new THREE.DirectionalLight(0xffffff, 0.25);
     rim.position.set(0, 3, -5);
     this.scene.add(rim);
 
-    const glowMonitor = new THREE.PointLight(0x88aaff, 0.5, 2);
+    // monitor glow — indigo-violet accent #5E6AD2
+    const glowMonitor = new THREE.PointLight(0x5e6ad2, 0.65, 2.2);
     glowMonitor.position.set(-0.079, 1.821, 0);
     this.scene.add(glowMonitor);
 
-    const glowMac = new THREE.PointLight(0x6688ff, 0.3, 1.5);
+    // macbook glow — slightly cooler indigo
+    const glowMac = new THREE.PointLight(0x5e6ad2, 0.35, 1.5);
     glowMac.position.set(-0.033, 1.43, -1.31);
     this.scene.add(glowMac);
   }

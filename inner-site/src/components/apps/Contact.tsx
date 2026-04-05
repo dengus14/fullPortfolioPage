@@ -43,8 +43,8 @@ export default function Contact() {
       {sent ? (
         <div style={{
           padding: 16, borderRadius: T.radiusSm,
-          background: "rgba(34,197,94,0.1)", border: "1px solid rgba(34,197,94,0.3)",
-          fontSize: T.sm, color: "#15803d", fontWeight: 500,
+          background: "rgba(52,199,89,0.1)", border: "1px solid rgba(52,199,89,0.25)",
+          fontSize: T.sm, color: "#34C759", fontWeight: 500,
         }}>
           ✓ Message sent — I'll get back to you soon.
         </div>
@@ -63,7 +63,7 @@ export default function Contact() {
               placeholder="What's on your mind?"
               rows={4}
               style={{
-                background: "rgba(255,255,255,0.5)", border: `1px solid ${T.borderSub}`,
+                background: "rgba(255,255,255,0.05)", border: `1px solid ${T.borderSub}`,
                 borderRadius: T.radiusSm, padding: "8px 11px",
                 color: T.text, fontSize: T.md, resize: "vertical",
                 fontFamily: "inherit", outline: "none", lineHeight: 1.6,
@@ -78,7 +78,7 @@ export default function Contact() {
             disabled={!valid}
             style={{
               padding: "8px 20px", borderRadius: T.radiusSm,
-              background: valid ? T.accent : "rgba(0,0,0,0.08)",
+              background: valid ? T.accent : "rgba(255,255,255,0.06)",
               border: "none", color: valid ? "#fff" : T.textMuted,
               fontSize: T.sm, fontWeight: 600, cursor: valid ? "pointer" : "default",
               alignSelf: "flex-start", transition: "all 0.15s",
@@ -106,7 +106,7 @@ function Field({ label, value, onChange, placeholder, type = "text" }: {
         onChange={(e) => onChange(e.target.value)}
         placeholder={placeholder}
         style={{
-          background: "rgba(255,255,255,0.5)", border: `1px solid ${T.borderSub}`,
+          background: "rgba(255,255,255,0.05)", border: `1px solid ${T.borderSub}`,
           borderRadius: T.radiusSm, padding: "7px 11px",
           color: T.text, fontSize: T.md, outline: "none", fontFamily: "inherit",
         }}

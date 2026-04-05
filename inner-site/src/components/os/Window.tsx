@@ -84,8 +84,8 @@ export default function Window({ win, onClose, onMinimize, onFocus, onMove, onRe
       style={{
         ...posStyle,
         display: "flex", flexDirection: "column",
-        background: "#ffffff",
-        border: "1px solid rgba(0,0,0,0.18)",
+        background: "#0a0a0c",
+        border: "1px solid rgba(255,255,255,0.08)",
         borderRadius: maximized ? 0 : T.radius,
         boxShadow: maximized ? "none" : T.shadow,
         overflow: "hidden",
@@ -98,10 +98,10 @@ export default function Window({ win, onClose, onMinimize, onFocus, onMove, onRe
         style={{
           height: 28, flexShrink: 0, position: "relative",
           display: "flex", alignItems: "center", justifyContent: "center",
-          background: "rgba(236,236,236,0.95)",
+          background: "rgba(18,18,26,0.95)",
           backdropFilter: "blur(20px)",
           WebkitBackdropFilter: "blur(20px)",
-          borderBottom: "1px solid rgba(0,0,0,0.1)",
+          borderBottom: "1px solid rgba(255,255,255,0.07)",
           userSelect: "none", cursor: "default",
         }}
       >
@@ -123,7 +123,7 @@ export default function Window({ win, onClose, onMinimize, onFocus, onMove, onRe
         {/* Centered title */}
         <span style={{
           fontSize: 13, fontWeight: 500,
-          color: "#3a3a3c",
+          color: "#8A8F98",
           letterSpacing: "-0.01em",
           pointerEvents: "none",
           maxWidth: "55%",
@@ -134,7 +134,7 @@ export default function Window({ win, onClose, onMinimize, onFocus, onMove, onRe
       </div>
 
       {/* Content */}
-      <div style={{ flex: 1, overflow: "auto", background: "#ffffff", position: "relative" }}>
+      <div style={{ flex: 1, overflow: "auto", background: "#0a0a0c", position: "relative" }}>
         {win.component}
       </div>
 

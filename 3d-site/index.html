@@ -6,13 +6,13 @@
     <title>Portfolio</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@300;400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
     <link rel="preload" href="/gaming_scene.glb" as="fetch" crossorigin="anonymous" />
     <style>
       *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
       html, body {
         width: 100%; height: 100%; overflow: hidden;
-        background: #08010e;
+        background: #050506;
         font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
       }
       #app { width: 100%; height: 100%; position: relative; }
@@ -27,18 +27,18 @@
         z-index: 10; pointer-events: none;
       }
       #loading-screen {
-        position: absolute; inset: 0; background: #c8c8c8;
+        position: absolute; inset: 0; background: #050506;
         display: none; flex-direction: column; align-items: center; justify-content: center;
-        color: #222; pointer-events: all; transition: opacity 0.8s ease;
+        color: #EDEDEF; pointer-events: all; transition: opacity 0.8s ease;
       }
       #loading-screen.hidden { opacity: 0; pointer-events: none; }
       #loading-bar-container {
-        width: 300px; height: 2px; background: #aaa;
+        width: 300px; height: 2px; background: rgba(255,255,255,0.1);
         margin-top: 24px; border-radius: 2px; overflow: hidden;
       }
-      #loading-bar { height: 100%; width: 0%; background: #333; transition: width 0.3s ease; border-radius: 2px; }
-      #loading-text { margin-top: 16px; font-size: 13px; color: #555; letter-spacing: 0.1em; text-transform: uppercase; }
-      #loading-title { font-size: 28px; font-weight: 300; letter-spacing: 0.3em; text-transform: uppercase; }
+      #loading-bar { height: 100%; width: 0%; background: #5E6AD2; transition: width 0.3s ease; border-radius: 2px; }
+      #loading-text { margin-top: 16px; font-size: 13px; color: #8A8F98; letter-spacing: 0.1em; text-transform: uppercase; }
+      #loading-title { font-size: 28px; font-weight: 300; letter-spacing: 0.3em; text-transform: uppercase; font-family: 'Archivo', 'Space Grotesk', sans-serif; color: #EDEDEF; }
       #info-overlay {
         position: absolute; bottom: 40px; left: 40px;
         pointer-events: none; opacity: 0; transition: opacity 1s ease;
@@ -47,7 +47,7 @@
       #info-name { font-size: 32px; font-weight: 300; color: #fff; letter-spacing: 0.15em; text-transform: uppercase; }
       #info-title { font-size: 14px; color: #aaa; letter-spacing: 0.2em; text-transform: uppercase; margin-top: 6px; }
       #monitor-hint {
-        position: absolute; bottom: 40px; right: 40px; color: #555;
+        position: absolute; bottom: 40px; right: 40px; color: #8A8F98;
         font-size: 12px; letter-spacing: 0.15em; text-transform: uppercase;
         opacity: 0; transition: opacity 1s ease; pointer-events: none;
       }
@@ -60,10 +60,10 @@
         display: flex; align-items: center; justify-content: center;
         /* purple fused into the black — not a separate layer */
         background:
-          radial-gradient(ellipse 70% 60% at 15% 20%,  rgba(110,30,200,0.22) 0%, transparent 65%),
-          radial-gradient(ellipse 55% 70% at 85% 75%,  rgba(80,20,160,0.18) 0%, transparent 60%),
-          radial-gradient(ellipse 40% 50% at 50% 50%,  rgba(90,20,180,0.08) 0%, transparent 55%),
-          linear-gradient(160deg, #08010e 0%, #0d0018 45%, #060010 100%);
+          radial-gradient(ellipse 55% 55% at 50% 50%,  rgba(94,106,210,0.16) 0%, transparent 70%),
+          radial-gradient(ellipse 70% 60% at 12% 18%,  rgba(94,106,210,0.22) 0%, transparent 62%),
+          radial-gradient(ellipse 55% 70% at 88% 78%,  rgba(75,85,180,0.18) 0%, transparent 58%),
+          linear-gradient(160deg, #050506 0%, #09091a 45%, #060610 100%);
         will-change: transform, opacity;
         animation: entryReveal 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
       }
@@ -72,15 +72,15 @@
       #landing::before {
         content: ''; position: absolute; border-radius: 50%; pointer-events: none;
         width: 500px; height: 500px; top: -120px; left: -80px;
-        background: radial-gradient(circle, rgba(120,40,220,0.14) 0%, transparent 70%);
-        filter: blur(60px);
+        background: radial-gradient(circle, rgba(94,106,210,0.28) 0%, transparent 70%);
+        filter: blur(55px);
         animation: blobA 18s ease-in-out infinite alternate;
         will-change: transform;
       }
       #landing::after {
         content: ''; position: absolute; border-radius: 50%; pointer-events: none;
         width: 420px; height: 420px; bottom: -80px; right: -60px;
-        background: radial-gradient(circle, rgba(80,20,180,0.16) 0%, transparent 70%);
+        background: radial-gradient(circle, rgba(75,85,180,0.24) 0%, transparent 70%);
         filter: blur(50px);
         animation: blobB 22s ease-in-out infinite alternate;
         will-change: transform;
@@ -115,16 +115,17 @@
       #landing-card {
         position: relative; z-index: 1;
         /* barely-visible purple blush — fuses into the bg */
-        background: rgba(100, 30, 180, 0.07);
-        backdrop-filter: blur(40px) saturate(160%);
-        -webkit-backdrop-filter: blur(40px) saturate(160%);
-        border: 1px solid rgba(150, 80, 255, 0.14);
+        background: rgba(94, 106, 210, 0.07);
+        backdrop-filter: blur(48px) saturate(180%);
+        -webkit-backdrop-filter: blur(48px) saturate(180%);
+        border: 1px solid rgba(94, 106, 210, 0.28);
         border-radius: 22px;
         padding: 52px 56px;
         box-shadow:
-          0 0 0 1px rgba(160,80,255,0.06) inset,
-          0 0 60px rgba(100,30,200,0.1),
-          0 32px 80px rgba(0,0,0,0.6);
+          inset 0 1px 0 rgba(255,255,255,0.09),
+          inset 0 0 0 1px rgba(94,106,210,0.12),
+          0 0 80px rgba(94,106,210,0.18),
+          0 32px 80px rgba(0,0,0,0.72);
         display: flex; flex-direction: column; align-items: center;
         max-width: 500px; width: 90%;
         opacity: 0;
@@ -137,27 +138,27 @@
 
       #landing-name {
         font-size: 30px; font-weight: 600; letter-spacing: -0.03em;
-        color: #ede8ff; text-align: center;
+        color: #EDEDEF; text-align: center; font-family: 'Archivo', 'Space Grotesk', sans-serif;
         opacity: 0;
         animation: fadeUp 0.55s cubic-bezier(0.16,1,0.3,1) 0.3s forwards;
       }
       #landing-role {
         font-size: 11px; font-weight: 500; letter-spacing: 0.16em;
-        text-transform: uppercase; color: rgba(190,165,255,0.45);
+        text-transform: uppercase; color: rgba(139,151,232,0.7);
         margin-top: 8px; text-align: center;
         opacity: 0;
         animation: fadeUp 0.55s cubic-bezier(0.16,1,0.3,1) 0.38s forwards;
       }
       #landing-divider {
         width: 40px; height: 1px;
-        background: linear-gradient(90deg, transparent, rgba(160,80,255,0.45), transparent);
+        background: linear-gradient(90deg, transparent, rgba(139,151,232,0.6), transparent);
         margin: 30px 0;
         opacity: 0;
         animation: fadeUp 0.55s cubic-bezier(0.16,1,0.3,1) 0.44s forwards;
       }
       #landing-prompt {
         font-size: 10px; font-weight: 600; letter-spacing: 0.16em;
-        text-transform: uppercase; color: rgba(160,100,255,0.7);
+        text-transform: uppercase; color: rgba(139,151,232,0.9);
         margin-bottom: 20px;
         opacity: 0;
         animation: fadeUp 0.55s cubic-bezier(0.16,1,0.3,1) 0.49s forwards;
@@ -181,8 +182,9 @@
         display: flex; flex-direction: column; align-items: center; gap: 10px;
         padding: 24px 16px; border-radius: 16px; cursor: pointer;
         touch-action: manipulation;
-        background: rgba(100, 30, 180, 0.08);
-        border: 1px solid rgba(150, 80, 255, 0.16);
+        background: rgba(94, 106, 210, 0.08);
+        border: 1px solid rgba(94, 106, 210, 0.26);
+        box-shadow: inset 0 1px 0 rgba(255,255,255,0.06);
         color: inherit;
         transition:
           background  0.22s cubic-bezier(0.16,1,0.3,1),
@@ -191,9 +193,9 @@
           transform   0.15s cubic-bezier(0.16,1,0.3,1);
       }
       .landing-btn:hover {
-        background: rgba(120, 40, 220, 0.14);
-        border-color: rgba(170, 100, 255, 0.38);
-        box-shadow: 0 0 28px rgba(120,40,220,0.2), 0 0 0 1px rgba(160,80,255,0.12) inset;
+        background: rgba(94, 106, 210, 0.15);
+        border-color: rgba(139, 151, 232, 0.48);
+        box-shadow: 0 0 32px rgba(94,106,210,0.25), inset 0 1px 0 rgba(255,255,255,0.1), inset 0 0 0 1px rgba(94,106,210,0.18);
       }
       .landing-btn:active {
         transform: scale(0.97);
@@ -201,19 +203,19 @@
       }
 
       .landing-btn-icon {
-        font-size: 20px; color: #b48aff; line-height: 1;
+        font-size: 20px; color: #8B97E8; line-height: 1;
         transition: transform 0.25s cubic-bezier(0.16,1,0.3,1), color 0.2s ease;
       }
       .landing-btn:hover .landing-btn-icon {
         transform: scale(1.2);
-        color: #c9a8ff;
+        color: #adb7f0;
       }
 
       .landing-btn-label {
-        font-size: 13px; font-weight: 600; color: #e2d9ff;
+        font-size: 13px; font-weight: 600; color: #EDEDEF;
       }
       .landing-btn-desc {
-        font-size: 11px; color: rgba(190,165,255,0.38);
+        font-size: 11px; color: rgba(138,143,152,0.7);
         text-align: center; line-height: 1.5;
       }
 

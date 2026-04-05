@@ -13,12 +13,12 @@ export class Renderer {
       alpha: false,
       powerPreference: "high-performance",
     });
-    this.webgl.setClearColor(0xc8c8c8);
+    this.webgl.setClearColor(0x050506);
     this.webgl.setSize(sizes.width, sizes.height);
     this.webgl.setPixelRatio(sizes.pixelRatio);
     this.webgl.outputColorSpace = THREE.SRGBColorSpace;
     this.webgl.toneMapping = THREE.ACESFilmicToneMapping;
-    this.webgl.toneMappingExposure = 1.2;
+    this.webgl.toneMappingExposure = 1.45;
     this.webgl.shadowMap.enabled = false;
     this.webgl.domElement.classList.add("webgl");
     document.getElementById("app")!.prepend(this.webgl.domElement);

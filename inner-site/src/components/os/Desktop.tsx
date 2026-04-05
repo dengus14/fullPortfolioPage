@@ -66,7 +66,7 @@ export default function Desktop() {
   return (
     <div style={{
       width: "100%", height: "100%", position: "relative", overflow: "hidden",
-      fontFamily: "-apple-system, 'SF Pro Display', BlinkMacSystemFont, 'Helvetica Neue', sans-serif",
+      fontFamily: "'Space Grotesk', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif",
     }}>
       <style>{`
         @keyframes blob1 { 0%,100%{transform:translate(0,0)scale(1)} 40%{transform:translate(60px,-50px)scale(1.1)} 70%{transform:translate(-20px,30px)scale(0.95)} }
@@ -75,20 +75,20 @@ export default function Desktop() {
         * { box-sizing: border-box; }
         ::-webkit-scrollbar { width: 4px; }
         ::-webkit-scrollbar-track { background: transparent; }
-        ::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.18); border-radius: 4px; }
+        ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.15); border-radius: 4px; }
       `}</style>
 
-      {/* Wallpaper — macOS Monterey-inspired deep blue/purple gradient */}
+      {/* Wallpaper — unified dark indigo */}
       <div style={{
         position: "absolute", inset: 0, zIndex: 0,
-        background: "linear-gradient(145deg, #0c1e4a 0%, #1e3a8a 22%, #2554c7 45%, #7c3aed 70%, #4c1d95 100%)",
+        background: "linear-gradient(145deg, #050506 0%, #09091a 30%, #0f1028 60%, #0a0a18 100%)",
       }} />
 
       {/* Animated ambient blobs */}
       {([
-        { top: "8%",  left: "8%",  size: 380, color: "rgba(0,200,255,0.11)",  dur: "14s", delay: "0s",  n: 1 },
-        { top: "48%", left: "52%", size: 320, color: "rgba(168,85,247,0.13)", dur: "17s", delay: "-6s", n: 2 },
-        { top: "68%", left: "4%",  size: 260, color: "rgba(59,130,246,0.11)", dur: "12s", delay: "-9s", n: 3 },
+        { top: "8%",  left: "8%",  size: 380, color: "rgba(94,106,210,0.10)",  dur: "14s", delay: "0s",  n: 1 },
+        { top: "48%", left: "52%", size: 320, color: "rgba(94,106,210,0.08)",  dur: "17s", delay: "-6s", n: 2 },
+        { top: "68%", left: "4%",  size: 260, color: "rgba(139,151,232,0.07)", dur: "12s", delay: "-9s", n: 3 },
       ] as const).map((b) => (
         <div key={b.n} style={{
           position: "absolute", top: b.top, left: b.left,

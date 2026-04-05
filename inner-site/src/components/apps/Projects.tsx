@@ -58,7 +58,7 @@ export default function Projects() {
       <div style={{
         width: 188, flexShrink: 0, overflowY: "auto",
         borderRight: `1px solid ${T.borderSub}`,
-        background: "rgba(255,255,255,0.3)",
+        background: "rgba(255,255,255,0.03)",
       }}>
         {PROJECTS.map((p) => {
           const active = selected === p.id;
@@ -73,7 +73,7 @@ export default function Projects() {
                 borderLeft: `2px solid ${active ? T.accent : "transparent"}`,
                 cursor: "pointer", transition: "all 0.15s",
               }}
-              onMouseEnter={(e) => { if (!active) e.currentTarget.style.background = "rgba(255,255,255,0.4)"; }}
+              onMouseEnter={(e) => { if (!active) e.currentTarget.style.background = "rgba(255,255,255,0.06)"; }}
               onMouseLeave={(e) => { if (!active) e.currentTarget.style.background = "transparent"; }}
             >
               <div style={{ fontSize: T.sm, fontWeight: 600, color: active ? T.accent : T.text }}>{p.title}</div>

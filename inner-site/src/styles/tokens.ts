@@ -1,23 +1,24 @@
-// macOS design tokens
+// Unified dark theme — Modern Dark / Cinema style
+// Accent: #5E6AD2 (indigo-violet)  Font: Space Grotesk / Archivo
 export const T = {
-  // surfaces & vibrancy
-  glass:        "rgba(255,255,255,0.72)",
-  glassStrong:  "rgba(255,255,255,0.88)",
-  glassDim:     "rgba(255,255,255,0.45)",
-  border:       "rgba(0,0,0,0.12)",
-  borderSub:    "rgba(0,0,0,0.07)",
+  // surfaces & dark glassmorphism
+  glass:        "rgba(255,255,255,0.07)",
+  glassStrong:  "rgba(255,255,255,0.11)",
+  glassDim:     "rgba(255,255,255,0.04)",
+  border:       "rgba(255,255,255,0.08)",
+  borderSub:    "rgba(255,255,255,0.05)",
 
-  // Apple system text
-  text:         "#1d1d1f",
-  textSub:      "#6e6e73",
-  textMuted:    "#aeaeb2",
+  // text
+  text:         "#EDEDEF",
+  textSub:      "#8A8F98",
+  textMuted:    "#484f58",
 
-  // Apple Blue
-  accent:       "#007AFF",
-  accentBg:     "rgba(0,122,255,0.1)",
-  accentBorder: "rgba(0,122,255,0.25)",
+  // indigo-violet accent
+  accent:       "#5E6AD2",
+  accentBg:     "rgba(94,106,210,0.12)",
+  accentBorder: "rgba(94,106,210,0.28)",
 
-  // traffic lights
+  // traffic lights — keep macOS standard, they work on dark
   trafficRed:    "#FF5F57",
   trafficYellow: "#FEBC2E",
   trafficGreen:  "#28C840",
@@ -26,9 +27,9 @@ export const T = {
   success: "#34C759",
   error:   "#FF3B30",
 
-  // macOS window shadow
-  shadow:   "0 22px 70px 4px rgba(0,0,0,0.48), 0 0 0 1px rgba(0,0,0,0.18)",
-  shadowSm: "0 2px 8px rgba(0,0,0,0.12)",
+  // dark window shadow
+  shadow:   "0 22px 70px 4px rgba(0,0,0,0.72), 0 0 0 1px rgba(255,255,255,0.06)",
+  shadowSm: "0 2px 8px rgba(0,0,0,0.4)",
 
   // radius
   radius:   10,

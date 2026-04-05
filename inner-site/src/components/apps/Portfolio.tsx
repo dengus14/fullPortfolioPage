@@ -48,7 +48,7 @@ export default function Portfolio() {
       {/* Sidebar */}
       <nav style={{
         width: 190, flexShrink: 0, overflowY: "auto",
-        background: "#2c2c2e",
+        background: "#050506",
         borderRight: "1px solid rgba(255,255,255,0.08)",
         padding: "14px 8px",
         display: "flex", flexDirection: "column", gap: 2,
@@ -68,7 +68,7 @@ export default function Portfolio() {
               onClick={() => setPage(id)}
               style={{
                 textAlign: "left", padding: "9px 10px", borderRadius: 8,
-                background: active ? "#0A84FF" : "transparent",
+                background: active ? "#5E6AD2" : "transparent",
                 border: "none",
                 color: active ? "#ffffff" : "rgba(255,255,255,0.9)",
                 fontSize: T.sm, fontWeight: 400,
