@@ -47,6 +47,7 @@ const CONFIGS: Record<MonitorId, MonitorConfig> = {
 export class MonitorScreen {
   cssObject: CSS3DObject;
   iframe: HTMLIFrameElement;
+  private wrapper: HTMLDivElement;
   private plane: THREE.Mesh;
   id: MonitorId;
 
@@ -56,16 +57,27 @@ export class MonitorScreen {
 
     this.iframe = document.createElement("iframe");
     this.iframe.src = cfg.url;
-    this.iframe.style.width = `${cfg.iframeWidth}px`;
-    this.iframe.style.height = `${cfg.iframeHeight}px`;
+    this.iframe.style.width = "100%";
+    this.iframe.style.height = "100%";
     this.iframe.style.border = "none";
     this.iframe.style.borderRadius = "4px";
     this.iframe.style.background = "#000";
     this.iframe.style.pointerEvents = "auto";
-    this.iframe.style.backfaceVisibility = "hidden";
-    (this.iframe.style as CSSStyleDeclaration & { webkitBackfaceVisibility: string }).webkitBackfaceVisibility = "hidden";
+    this.iframe.style.display = "block";
 
-    this.cssObject = new CSS3DObject(this.iframe);
+    // Chromium fails to hit-test iframes placed directly inside a preserve-3d
+    // CSS transform chain. Wrapping the iframe in a plain div (which receives
+    // the matrix3d) and letting the iframe sit as a normal DOM child inside
+    // restores hit-testing across all browsers.
+    this.wrapper = document.createElement("div");
+    this.wrapper.style.width = `${cfg.iframeWidth}px`;
+    this.wrapper.style.height = `${cfg.iframeHeight}px`;
+    this.wrapper.style.pointerEvents = "auto";
+    this.wrapper.style.backfaceVisibility = "hidden";
+    (this.wrapper.style as CSSStyleDeclaration & { webkitBackfaceVisibility: string }).webkitBackfaceVisibility = "hidden";
+    this.wrapper.appendChild(this.iframe);
+
+    this.cssObject = new CSS3DObject(this.wrapper);
     this.cssObject.position.copy(cfg.position);
     this.cssObject.rotation.copy(cfg.rotation);
     const s = SCALE_FACTOR;
@@ -102,12 +114,12 @@ export class MonitorScreen {
   // swallows clicks before the webgl raycaster can detect them
   show(interactive = false) {
     this.cssObject.element.style.opacity = "1";
-    this.iframe.style.pointerEvents = interactive ? "auto" : "none";
+    this.wrapper.style.pointerEvents = interactive ? "auto" : "none";
   }
 
   hide() {
     this.cssObject.element.style.opacity = "0";
-    this.iframe.style.pointerEvents = "none";
+    this.wrapper.style.pointerEvents = "none";
   }
 
   enablePointerEvents(enabled: boolean) {
