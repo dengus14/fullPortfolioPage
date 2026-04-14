@@ -41,9 +41,9 @@ export class Application {
     this.world.onReady(() => this.onWorldReady());
     this.time.onTick(() => this.update());
 
-    this.renderer.webgl.domElement.addEventListener("click", (e) =>
-      this.handleClick(e)
-    );
+    // listen on window (not the canvas) so iframe clicks aren't intercepted
+    // when zoomed in — the canvas toggles pointer-events off in that state
+    window.addEventListener("click", (e) => this.handleClick(e));
 
     window.addEventListener("keydown", (e) => {
       if (e.key === "Escape") this.returnToIdle();
@@ -105,6 +105,9 @@ export class Application {
     this._monitorDirty = false;
 
     this.renderer.cssActive = facing;
+    // Chromium: canvas with pointer-events:auto steals clicks from the iframe
+    // when both sit under a CSS3D transform chain. Disable while a monitor is active.
+    this.renderer.webgl.domElement.style.pointerEvents = this.activeMonitor ? "none" : "auto";
     this.world.monitors.forEach((m) => {
       if (!facing) {
         m.hide();

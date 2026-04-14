@@ -17,9 +17,11 @@ interface MonitorConfig {
 // scale factor: 1000 css px = 1 world unit
 const SCALE_FACTOR = 1 / 1000;
 
+// same-origin path (proxied by Vite in dev, served directly in prod) — avoids
+// Chromium's OOPIF hit-testing issues with CSS3D-transformed cross-origin iframes
 const INNER_SITE_URL =
   (import.meta.env.VITE_INNER_SITE_URL as string | undefined) ??
-  `${window.location.protocol}//${window.location.hostname}:5174`;
+  `${window.location.origin}/inner/`;
 
 const CONFIGS: Record<MonitorId, MonitorConfig> = {
   left: {
