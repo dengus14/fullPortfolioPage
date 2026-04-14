@@ -1,22 +1,17 @@
 services:
-  - type: web
-    name: inner-site
-    env: static
-    rootDir: inner-site
-    buildCommand: npm install && npm run build
-    staticPublishPath: dist
-
+  # Single static site: builds inner-site into 3d-site/dist/inner so the iframe
+  # loads same-origin. This avoids Chromium's OOPIF hit-testing issues with
+  # cross-origin iframes inside CSS3D-transformed parents.
   - type: web
     name: 3d-site
     env: static
-    rootDir: 3d-site
-    buildCommand: npm install && npm run build
-    staticPublishPath: dist
+    rootDir: .
+    buildCommand: |
+      cd inner-site && npm install && INNER_BASE=/inner/ npm run build && cd ..
+      cd 3d-site && npm install && npm run build && cd ..
+      mkdir -p 3d-site/dist/inner
+      cp -R inner-site/dist/. 3d-site/dist/inner/
+    staticPublishPath: 3d-site/dist
     envVars:
       - key: VITE_INNER_SITE_URL
         value: /inner/
-    routes:
-      # same-origin rewrite — fixes Chromium OOPIF hit-testing through CSS3D transforms
-      - type: rewrite
-        source: /inner/*
-        destination: https://inner-site.onrender.com/:splat
