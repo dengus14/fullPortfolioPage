@@ -105,9 +105,12 @@ export class Application {
     this._monitorDirty = false;
 
     this.renderer.cssActive = facing;
-    // Chromium: canvas with pointer-events:auto steals clicks from the iframe
-    // when both sit under a CSS3D transform chain. Disable while a monitor is active.
-    this.renderer.webgl.domElement.style.pointerEvents = this.activeMonitor ? "none" : "auto";
+    // Chromium: hit-testing descends through CSS3D preserve-3d/perspective
+    // chains unreliably when ancestors have pointer-events:none. Flip the
+    // CSS3D root and the canvas together so one layer owns input at a time.
+    const active = !!this.activeMonitor;
+    this.renderer.webgl.domElement.style.pointerEvents = active ? "none" : "auto";
+    this.renderer.css3d.domElement.style.pointerEvents = active ? "auto" : "none";
     this.world.monitors.forEach((m) => {
       if (!facing) {
         m.hide();
