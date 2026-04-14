@@ -14,4 +14,9 @@ services:
     staticPublishPath: dist
     envVars:
       - key: VITE_INNER_SITE_URL
-        sync: false
+        value: /inner/
+    routes:
+      # same-origin rewrite — fixes Chromium OOPIF hit-testing through CSS3D transforms
+      - type: rewrite
+        source: /inner/*
+        destination: https://inner-site.onrender.com/:splat
