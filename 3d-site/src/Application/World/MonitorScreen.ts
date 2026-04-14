@@ -111,15 +111,20 @@ export class MonitorScreen {
   }
 
   // pass interactive=true only after the camera has zoomed in — otherwise the iframe
-  // swallows clicks before the webgl raycaster can detect them
+  // swallows clicks before the webgl raycaster can detect them. Toggle both the
+  // wrapper and the iframe: wrapper-only isn't enough because the iframe's own
+  // pointer-events:auto overrides the wrapper when the child opts back in.
   show(interactive = false) {
     this.cssObject.element.style.opacity = "1";
-    this.wrapper.style.pointerEvents = interactive ? "auto" : "none";
+    const pe = interactive ? "auto" : "none";
+    this.wrapper.style.pointerEvents = pe;
+    this.iframe.style.pointerEvents = pe;
   }
 
   hide() {
     this.cssObject.element.style.opacity = "0";
     this.wrapper.style.pointerEvents = "none";
+    this.iframe.style.pointerEvents = "none";
   }
 
   enablePointerEvents(enabled: boolean) {
