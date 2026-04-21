@@ -180,6 +180,10 @@ function PageContent({ page }: { page: NavItem }) {
           <ProjectEntry title="MindBody Fitness Tracker" tags={["Java 21", "Spring Boot", "JWT", "PostgreSQL", "Docker"]}
             githubUrl="https://github.com/dengus14/MindBody"
             desc="Full-stack fitness tracking app with JWT authentication, workout logging, and progress visualization. Containerized with Docker for consistent local and production environments." />
+          <Divider />
+          <ProjectEntry title="Relational Database Engine" tags={["Java 21", "Maven", "B+ Tree", "JUnit"]}
+            githubUrl="https://github.com/dengus14/JavaDatabase"
+            desc="Relational database engine built from scratch in Java — no JDBC, no external DB library. 4096-byte slotted pages, LRU buffer pool with pin counts and dirty bits, B+ tree with linked leaves for range scans, and a SQL parser/planner/executor supporting INSERT, SELECT, and DELETE. ~2 microsecond index lookups on 10,000 records." />
         </div>
       );
 

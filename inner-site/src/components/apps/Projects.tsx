@@ -46,6 +46,13 @@ const PROJECTS: Project[] = [
     desc: "Full-stack fitness tracking application. Users log workouts, track progress over time, and view metrics. Built with a Java 21 / Spring Boot backend, PostgreSQL for persistence, JWT for stateless auth, and Docker for consistent local and production environments.",
     githubUrl: "https://github.com/dengus14/MindBody",
   },
+  {
+    id: "6",
+    title: "Relational Database Engine",
+    tags: ["Java 21", "Maven", "B+ Tree", "JUnit"],
+    desc: "A relational database engine built from scratch in Java — no JDBC, no external DB library. Implements the full stack: 4096-byte slotted pages with bidirectional growth (slots left-to-right, data right-to-left), disk management over RandomAccessFile, an LRU buffer pool with pin counts and dirty bits, a B+ tree with linked leaves for range scans, and a SQL parser/planner/executor supporting INSERT, SELECT, and DELETE. 76 tests across 11 classes; bulk inserts land around 420ms and index lookups clock in near 2 microseconds for 10,000 records. Writing this made every 'how does Postgres actually do X' question suddenly make sense.",
+    githubUrl: "https://github.com/dengus14/JavaDatabase",
+  },
 ];
 
 export default function Projects() {
